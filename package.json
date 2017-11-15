@@ -1,0 +1,21 @@
+{
+  "name": "chord-finder",
+  "version": "1.0.0",
+  "description": "Guitar chord parser: find, parse and label chords.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel": "npx babel js/main.js --watch --out-file build.js"
+  },
+  "author": "Adithya Krishna <adithya.krishna.shyam@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "lodash": "^4.17.4",
+    "materialize-css": "^0.100.2"
+  }
+}

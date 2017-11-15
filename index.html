@@ -1,0 +1,116 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <!-- <link rel="apple-touch-icon" href="icon.png"> -->
+    <!-- Place favicon.ico in the root directory -->
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Roboto+Mono" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet"> -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/vendor/linedtextarea.css">
+    <link rel="stylesheet" href="css/vendor/popover.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="node_modules/materialize-css/dist/css/materialize.min.css">
+</head>
+
+<body>
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+    <!-- Add your site or application content here -->
+
+    <body>
+        <nav>
+            <div class="nav-wrapper light-blue">
+                <div class="container">
+                    <a href="#" class="brand-logo text-black">Editor</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li>
+                            <a href="#">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Link 3</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="col s12 editorArea">
+                    <!-- <div class="songInfo">
+                        <h5>Song Info</h5>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input id="songName" type="text" class="validate">
+                                <label for="songName">Enter the name of the song</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input id="artistName" type="text" class="validate">
+                                <label for="artistName">Enter the name of the artist or band</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12 m3">
+                                <input id="songKey" type="text" class="validate">
+                                <label for="songKey">Enter the key</label>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="textAreaWrapper">
+                        <textarea name="primaryTextArea" class="primaryTextArea"></textarea>
+                    </div>
+                    <div class="actionArea">
+                        <button class="btn grey lighten-5 waves-effect waves-light preview" type="button">
+                            <span class="text">Preview</span>
+                            <i class="material-icons right">pageview</i>
+                        </button>
+                        <button class="btn indigo accent-2 waves-effect waves-dark submit" type="button">
+                            <span class="text">Submit</span>
+                            <i class="material-icons right">play_circle_outline</i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="col s12 previewArea hide">
+                    <div class="card-panel">
+                        <pre class="previewWrapper"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+    <script src="js/vendor/linedtextarea.js"></script>
+    <script src="js/vendor/raphael.js"></script>
+    <script src="js/vendor/jTab.js"></script>
+    <script src="js/vendor/jschord.js"></script>
+    <script src="js/vendor/popover.js"></script>
+    <script src="node_modules/materialize-css/dist/js/materialize.min.js"></script>
+    <script src="node_modules/lodash/lodash.min.js"></script>
+    <script src="build.js"></script>
+    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+    <script>
+        window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+        ga('create', 'UA-XXXXX-Y', 'auto'); ga('send', 'pageview')
+    </script>
+    <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+</body>
+
+</html>
