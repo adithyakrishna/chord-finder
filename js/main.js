@@ -8,7 +8,7 @@ var notes = '[CDEFGAB](#?|b?)',
         'g'
     );
 
-const main = ({ $, _, jtab: jTab, Materialize: M }) => {
+const main = ({ $, _, jtab: jTab }) => {
     /*====================================
     =            initializing            =
     ====================================*/
@@ -16,8 +16,12 @@ const main = ({ $, _, jtab: jTab, Materialize: M }) => {
     const editorArea = $('.editorArea');
     const previewArea = $('.previewArea');
     const previewWrapper = $('.previewWrapper');
+    const goBack = $('.goBack');
 
-    primaryTextArea.linedtextarea();
+    if (!editorArea.hasClass('hidden')) {
+        primaryTextArea.linedtextarea();
+    }
+    $('.ui.dropdown').dropdown();
     /*=====  End of initializing  ======*/
 
     const previewButton = $('.preview');
@@ -57,7 +61,7 @@ const main = ({ $, _, jtab: jTab, Materialize: M }) => {
             }
         });
 
-        editorArea.addClass('hide');
+        editorArea.addClass('hidden');
 
         _.forEach(currentText, (line, lineIndex) => {
             previewWrapper.append(
@@ -65,47 +69,67 @@ const main = ({ $, _, jtab: jTab, Materialize: M }) => {
                     line,
                     wordsRegex,
                     val =>
-                        `<span class="blue-text chord ${val}" data-toggle='popover' data-chord='${val}'>${val}</span>`
+                        `<span href="Javascript:void(0);" class="chord ${val}" data-chord='${val}'>${val}</span>`
                 )
             );
             previewWrapper.append('\n');
         });
 
-        previewArea.removeClass('hide');
+        previewArea.removeClass('hidden');
 
-        const generatePopover = () => {
-            return `<div class="popoverWrapper">
-            <div class="card small removeMargin">
-            <div class="card-image">
-                <div class="jTabArea"></div>
-            </div>
-            <div class="card-content">
-                <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-            </div>
-          </div>
-        </div>`;
+        const onPopupShown = elem => {
+            const $popupTrigger = $(elem);
+            const currentChord = $popupTrigger.data('chord');
+            const $popup = $popupTrigger.popup('get popup');
+            const jTabArea = $popup.find('.jTabArea');
+
+            jTab.render(jTabArea, currentChord, elem => {
+                $popup.find('.ui.active.dimmer').remove();
+            });
         };
 
-        const popoverOptions = {
-            container: 'body',
-            placement: 'top',
-            trigger: 'click',
-            html: true,
-            content: generatePopover
-        };
-
-        $('[data-toggle="popover"]').popover(popoverOptions);
-        $('[data-toggle="popover"]').on('shown.bs.popover', function() {
-            const $this = $(this);
-            const currentChord = $this.data('chord');
-            const $popover = $('.popover');
-            const jTabArea = $popover.find('.jTabArea');
-            const cardContent = $popover.find('.card-content');
-            cardContent.prepend(
-                `<span class="card-title">${currentChord}</span>`
-            );
-            jTab.render(jTabArea, currentChord);
+        $('.chord').each((i, elem) => {
+            const $elem = $(elem);
+            const currentChord = $elem.data('chord');
+            $elem.popup({
+                hoverable: true,
+                exclusive: true,
+                on: 'click',
+                title: 'check',
+                className: {
+                    popup: 'ui popup removePadding'
+                },
+                html: `<div class="popoverWrapper">
+                    <div class="ui blue card">
+                        <div class="content">
+                            Chord Data
+                            <div class="right floated meta">
+                                <div class="ui label">
+                                    Usage
+                                    <div class="detail">214</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image">
+                            <div class="jTabArea"></div>
+                        </div>
+                        <div class="content">
+                            <h1 class="dividing header">${currentChord}</h1>
+                            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="extra content">
+                            Variations
+                        </div>
+                    </div>
+                </div>`,
+                onVisible: onPopupShown
+            });
         });
+    });
+
+    goBack.on('click', e => {
+        editorArea.removeClass('hidden');
+        previewArea.addClass('hidden');
     });
 };
 

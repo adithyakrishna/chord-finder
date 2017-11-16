@@ -1,7 +1,3 @@
-'use strict';
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 var notes = '[CDEFGAB](#?|b?)',
     accidentals = '(b|bb)?',
     chords = '(/[CDEFGAB](#?|b?)|add|m|maj7|maj|min7|min|sus)?',
@@ -9,99 +5,117 @@ var notes = '[CDEFGAB](#?|b?)',
     sharp = '(#)?',
     wordsRegex = new RegExp('\\b' + notes + accidentals + chords + suspends + '\\b' + sharp, 'g');
 
-var main = function main(_ref) {
-    var $ = _ref.$,
-        _ = _ref._,
-        jTab = _ref.jtab,
-        M = _ref.Materialize;
-
+const main = ({ $, _, jtab: jTab }) => {
     /*====================================
     =            initializing            =
     ====================================*/
-    var primaryTextArea = $('.primaryTextArea');
-    var editorArea = $('.editorArea');
-    var previewArea = $('.previewArea');
-    var previewWrapper = $('.previewWrapper');
+    const primaryTextArea = $('.primaryTextArea');
+    const editorArea = $('.editorArea');
+    const previewArea = $('.previewArea');
+    const previewWrapper = $('.previewWrapper');
+    const goBack = $('.goBack');
 
-    primaryTextArea.linedtextarea();
+    if (!editorArea.hasClass('hidden')) {
+        primaryTextArea.linedtextarea();
+    }
+    $('.ui.dropdown').dropdown();
     /*=====  End of initializing  ======*/
 
-    var previewButton = $('.preview');
+    const previewButton = $('.preview');
 
     // removing blank lines
-    var removeBlankLines = function removeBlankLines(text) {
-        return _.filter(text, function (t) {
-            return !_.isEmpty(t);
-        });
-    };
-    var trimText = function trimText(text) {
-        return _.map(text, function (t) {
-            return _.trim(t);
-        });
-    };
+    const removeBlankLines = text => _.filter(text, t => !_.isEmpty(t));
+    const trimText = text => _.map(text, t => _.trim(t));
 
-    var separateChordsAndText = function separateChordsAndText(lines) {
-        var foundChords = _.reduce(lines, function (result, line) {
-            var currentChords = _.words(line, wordsRegex);
+    const separateChordsAndText = lines => {
+        const foundChords = _.reduce(lines, (result, line) => {
+            const currentChords = _.words(line, wordsRegex);
             if (currentChords.length) {
-                return [].concat(_toConsumableArray(result), _toConsumableArray(currentChords));
+                return [...result, ...currentChords];
             }
             return result;
         }, []);
 
         // trimming blank spaces found in chords
         // improper regex
-        return _.uniq(_.map(foundChords, function (i) {
-            return _.trim(i);
-        }));
+        return _.uniq(_.map(foundChords, i => _.trim(i)));
     };
 
-    previewButton.on('click', function () {
-        var currentText = primaryTextArea.val().split('\n');
-        var lines = removeBlankLines(currentText);
-        var chordList = separateChordsAndText(lines);
-        var validatedChords = [];
+    previewButton.on('click', () => {
+        const currentText = primaryTextArea.val().split('\n');
+        const lines = removeBlankLines(currentText);
+        const chordList = separateChordsAndText(lines);
+        let validatedChords = [];
 
-        _.forEach(chordList, function (chord) {
-            var parsedChords = findVoice({ value: chord });
+        _.forEach(chordList, chord => {
+            const parsedChords = findVoice({ value: chord });
             if (parsedChords.length) {
-                validatedChords = [].concat(_toConsumableArray(validatedChords), [chord]);
+                validatedChords = [...validatedChords, chord];
             }
         });
 
-        editorArea.addClass('hide');
+        editorArea.addClass('hidden');
 
-        _.forEach(currentText, function (line, lineIndex) {
-            previewWrapper.append(_.replace(line, wordsRegex, function (val) {
-                return '<span class="blue-text chord ' + val + '" data-toggle=\'popover\' data-chord=\'' + val + '\'>' + val + '</span>';
-            }));
+        _.forEach(currentText, (line, lineIndex) => {
+            previewWrapper.append(_.replace(line, wordsRegex, val => `<span href="Javascript:void(0);" class="chord ${val}" data-chord='${val}'>${val}</span>`));
             previewWrapper.append('\n');
         });
 
-        previewArea.removeClass('hide');
+        previewArea.removeClass('hidden');
 
-        var generatePopover = function generatePopover() {
-            return '<div class="popoverWrapper">\n            <div class="card small removeMargin">\n            <div class="card-image">\n                <div class="jTabArea"></div>\n            </div>\n            <div class="card-content">\n                <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>\n            </div>\n          </div>\n        </div>';
+        const onPopupShown = elem => {
+            const $popupTrigger = $(elem);
+            const currentChord = $popupTrigger.data('chord');
+            const $popup = $popupTrigger.popup('get popup');
+            const jTabArea = $popup.find('.jTabArea');
+
+            jTab.render(jTabArea, currentChord, elem => {
+                $popup.find('.ui.active.dimmer').remove();
+            });
         };
 
-        var popoverOptions = {
-            container: 'body',
-            placement: 'top',
-            trigger: 'click',
-            html: true,
-            content: generatePopover
-        };
-
-        $('[data-toggle="popover"]').popover(popoverOptions);
-        $('[data-toggle="popover"]').on('shown.bs.popover', function () {
-            var $this = $(this);
-            var currentChord = $this.data('chord');
-            var $popover = $('.popover');
-            var jTabArea = $popover.find('.jTabArea');
-            var cardContent = $popover.find('.card-content');
-            cardContent.prepend('<span class="card-title">' + currentChord + '</span>');
-            jTab.render(jTabArea, currentChord);
+        $('.chord').each((i, elem) => {
+            const $elem = $(elem);
+            const currentChord = $elem.data('chord');
+            $elem.popup({
+                hoverable: true,
+                exclusive: true,
+                on: 'click',
+                title: 'check',
+                className: {
+                    popup: 'ui popup removePadding'
+                },
+                html: `<div class="popoverWrapper">
+                    <div class="ui blue card">
+                        <div class="content">
+                            Chord Data
+                            <div class="right floated meta">
+                                <div class="ui label">
+                                    Usage
+                                    <div class="detail">214</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="image">
+                            <div class="jTabArea"></div>
+                        </div>
+                        <div class="content">
+                            <h1 class="dividing header">${currentChord}</h1>
+                            <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                        </div>
+                        <div class="extra content">
+                            Variations
+                        </div>
+                    </div>
+                </div>`,
+                onVisible: onPopupShown
+            });
         });
+    });
+
+    goBack.on('click', e => {
+        editorArea.removeClass('hidden');
+        previewArea.addClass('hidden');
     });
 };
 

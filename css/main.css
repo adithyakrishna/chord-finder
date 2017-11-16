@@ -12,7 +12,6 @@
 
 html {
   color: #222;
-  font-size: 10px;
   line-height: 1.4;
 }
 
@@ -101,7 +100,9 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-
+.container.main {
+  margin-top: 7rem;
+}
 
 
 
@@ -307,12 +308,8 @@ textarea {
 
 /* custom code */
 
-.textAreaWrapper,
-.previewArea {
-  margin-top: 1rem;
-}
-
 .linedwrap {
+  width: 100% !important;
   overflow: hidden;
   height: 450px;
   border: 1px solid #bdbdbd;
@@ -331,22 +328,14 @@ textarea {
 }
 
 .primaryTextArea {
-  outline: none;
+  width: 100%;
   height: 450px;
+  outline: none;
 }
 
 .actionArea {
   padding: 1.2rem 0;
   text-align: right;
-}
-
-.actionArea .btn {
-  border-radius: 500px;
-  transition: all 1s ease-in-out;
-}
-
-.actionArea .btn.preview {
-  color: #212121;
 }
 
 .chord {
@@ -366,4 +355,8 @@ textarea {
 
 .removeMargin {
   margin: 0 !important;
+}
+
+.removePadding {
+  padding: 0 !important;
 }
