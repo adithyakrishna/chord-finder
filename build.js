@@ -47,7 +47,7 @@ const main = ({ $, _, jtab: jTab }) => {
         const chordList = separateChordsAndText(lines);
         let validatedChords = [];
 
-        // console.log('object', $('.songInfo').serializeArray());
+        console.log('object', $('.songInfo').serializeArray());
 
         _.forEach(chordList, chord => {
             const parsedChords = findVoice({ value: chord });
