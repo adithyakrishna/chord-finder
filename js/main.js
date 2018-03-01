@@ -7,6 +7,7 @@ var notes = '[CDEFGAB](#?|b?)',
         '\\b' + notes + accidentals + chords + suspends + '\\b' + sharp,
         'g'
     );
+const squareBracketsRegex = new RegExp('\[(.*?)\]');
 
 const main = ({ $, _, jtab: jTab }) => {
     /*====================================
@@ -15,8 +16,11 @@ const main = ({ $, _, jtab: jTab }) => {
     const primaryTextArea = $('.primaryTextArea');
     const editorArea = $('.editorArea');
     const previewArea = $('.previewArea');
+    const songTitle = $('.previewArea .songTitle');
+    const songLabels = $('.previewArea .songLabels');
     const previewWrapper = $('.previewWrapper');
     const goBack = $('.goBack');
+    let previewTitleText = '';
 
     if (!editorArea.hasClass('hidden')) {
         primaryTextArea.linedtextarea();
@@ -48,13 +52,39 @@ const main = ({ $, _, jtab: jTab }) => {
         return _.uniq(_.map(foundChords, i => _.trim(i)));
     };
 
+    const parseFieldName = (name) => {
+        // this will work only for song field
+        return _.startCase(_.replace(name, /song\[(.*?)\]/gi, '$1'))
+    }
+
+    const buildTitleText = (field) => {
+        // since for is sirealized, the first field will always be song-name and 2nd, artist name
+        previewTitleText += `By ${field.value}`
+    }
+
     previewButton.on('click', () => {
         const currentText = primaryTextArea.val().split('\n');
         const lines = removeBlankLines(currentText);
         const chordList = separateChordsAndText(lines);
         let validatedChords = [];
+        // Clearing fields
+        previewTitleText = '';
+        previewWrapper.html('');
+        songTitle.html('');
+        songLabels.html('');
+        const songInfoArray = $('.songInfo').serializeArray();
 
-        // console.log('object', $('.songInfo').serializeArray());
+        const songInfoLabels = _.reduce(songInfoArray, (result, infoItem) => {
+            if (infoItem.name === 'song[song-name]' || infoItem.name === 'song[artist-name]') {
+                buildTitleText(infoItem);
+                return ""
+            }else{
+                return `${result}<div class="ui label">${parseFieldName(infoItem.name)}<div class="detail">${infoItem.value}</div></div>`
+            }
+        }, "")
+
+        songTitle.html(`${previewTitleText} - Preview`)
+        songLabels.append(songInfoLabels)
 
         _.forEach(chordList, chord => {
             const parsedChords = findVoice({ value: chord });
