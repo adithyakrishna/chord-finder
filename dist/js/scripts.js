@@ -52594,7 +52594,7 @@ var main = function main(_ref) {
 
     var buildTitleText = function buildTitleText(field) {
         // since for is sirealized, the first field will always be song-name and 2nd, artist name
-        previewTitleText += 'By ' + field.value;
+        previewTitleText += (field.name === 'song[song-name]' ? '' : ' By') + ' ' + field.value;
     };
 
     previewButton.on('click', function () {
