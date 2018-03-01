@@ -17,7 +17,7 @@
  *   with JQuery Selectors
  *   
  *   $(".lined").linedtextarea({
- *   	selectedLine: 10,
+ *      selectedLine: 10,
  *    selectedClass: 'lineselect'
  *   });
  *

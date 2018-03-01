@@ -13,10 +13,8 @@
     <!-- Place favicon.ico in the root directory -->
 
     <link href="https://fonts.googleapis.com/icon?family=Roboto+Mono" rel="stylesheet">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/vendor/linedtextarea.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.css">
+    <link rel="stylesheet" href="dist/css/style.min.css">
 </head>
 
 <body>
@@ -26,174 +24,162 @@
 
     <!-- Add your site or application content here -->
 
-    <body>
-        <div class="ui fixed inverted menu">
-            <div class="ui container">
-                <div class="header item">
-                    Editor
-                </div>
-                <div class="right item" style="
-                      padding: 0;
-                      ">
-                    <a class="item">
-                        Link 1
-                    </a>
-                    <a class="item">
-                        Link 2
-                    </a>
-                    <a class="item">
-                        Link 3
-                    </a>
-                </div>
+    <div class="ui fixed inverted menu">
+        <div class="ui container">
+            <div class="header item">
+                Editor
+            </div>
+            <div class="right item removePadding">
+                <a class="item">
+                    Link 1
+                </a>
+                <a class="item">
+                    Link 2
+                </a>
+                <a class="item">
+                    Link 3
+                </a>
             </div>
         </div>
+    </div>
 
-        <div class="ui main container">
-            <div class="row editorArea">
-                <h3 class="ui dividing header">Song Information</h3>
-                <div class="ui segment">
-                    <form class="ui form songInfo">
-                        <div class="field">
-                            <label>Name</label>
-                            <div class="two fields">
-                                <div class="field">
-                                    <input type="text" name="song[song-name]" placeholder="Song Name">
-                                </div>
-                                <div class="field">
-                                    <input type="text" name="song[artist-name]" placeholder="Artist">
-                                </div>
+    <div class="ui main container">
+        <div class="row editorArea">
+            <h3 class="ui dividing header">Song Information</h3>
+            <div class="ui segment">
+                <form class="ui form songInfo">
+                    <div class="field">
+                        <label>Name</label>
+                        <div class="two fields">
+                            <div class="field">
+                                <input type="text" name="song[song-name]" placeholder="Song Name">
+                            </div>
+                            <div class="field">
+                                <input type="text" name="song[artist-name]" placeholder="Artist">
                             </div>
                         </div>
-                        <div class="field">
-                            <div class="four fields">
-                                <div class="field">
-                                    <label>Time signature</label>
-                                    <input type="text" name="song[time-signature]" placeholder="Eg: 4/4">
-                                </div>
-                                <div class="field">
-                                    <label>Key</label>
-                                    <div class="ui search selection dropdown">
-                                        <input type="hidden" name="song[key]">
-                                        <i class="dropdown icon"></i>
-                                        <div class="default text">Eg: C, Am...</div>
-                                        <div class="menu">
-                                            <div class="item" data-value="0">(blank)</div>
-                                            <div class="item" data-value="1">Сb</div>
-                                            <div class="item" data-value="2">Abm</div>
-                                            <div class="item" data-value="3">Gb</div>
-                                            <div class="item" data-value="4">Ebm</div>
-                                            <div class="item" data-value="5">Db</div>
-                                            <div class="item" data-value="6">Bbm</div>
-                                            <div class="item" data-value="7">Ab</div>
-                                            <div class="item" data-value="8">Fm</div>
-                                            <div class="item" data-value="9">Eb</div>
-                                            <div class="item" data-value="10">Cm</div>
-                                            <div class="item" data-value="11">Bb</div>
-                                            <div class="item" data-value="12">Gm</div>
-                                            <div class="item" data-value="13">F</div>
-                                            <div class="item" data-value="14">Dm</div>
-                                            <div class="item" data-value="15">C</div>
-                                            <div class="item" data-value="16">Am</div>
-                                            <div class="item" data-value="17">G</div>
-                                            <div class="item" data-value="18">Em</div>
-                                            <div class="item" data-value="19">D</div>
-                                            <div class="item" data-value="20">Bm</div>
-                                            <div class="item" data-value="21">A</div>
-                                            <div class="item" data-value="22">F#m</div>
-                                            <div class="item" data-value="23">E</div>
-                                            <div class="item" data-value="24">C#m</div>
-                                            <div class="item" data-value="25">B</div>
-                                            <div class="item" data-value="26">G#m</div>
-                                            <div class="item" data-value="27">F#</div>
-                                            <div class="item" data-value="28">D#m</div>
-                                            <div class="item" data-value="29">C#</div>
-                                            <div class="item" data-value="30">A#m</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <label>Capo</label>
-                                    <div class="ui search selection dropdown">
-                                        <input type="hidden" name="song[capo]">
-                                        <i class="dropdown icon"></i>
-                                        <div class="default text">Eg: 1st, 2nd...</div>
-                                        <div class="menu">
-                                            <div class="item" data-value="0">(no capo)</div>
-                                            <div class="item" data-value="1">1st</div>
-                                            <div class="item" data-value="2">2nd</div>
-                                            <div class="item" data-value="3">3rd</div>
-                                            <div class="item" data-value="4">4th</div>
-                                            <div class="item" data-value="5">5th</div>
-                                            <div class="item" data-value="6">6th</div>
-                                            <div class="item" data-value="7">7th</div>
-                                            <div class="item" data-value="8">8th</div>
-                                            <div class="item" data-value="9">9th</div>
-                                            <div class="item" data-value="10">10th</div>
-                                            <div class="item" data-value="11">11th</div>
-                                            <div class="item" data-value="12">12th</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="field">
-                                    <label>Difficulty</label>
-                                    <div class="ui selection dropdown">
-                                        <input type="hidden" name="song[difficulty]">
-                                        <i class="dropdown icon"></i>
-                                        <div class="default text">Set difficulty</div>
-                                        <div class="menu">
-                                            <div class="item" data-value="beginner">Beginner</div>
-                                            <div class="item" data-value="intermediate">Intermediate</div>
-                                            <div class="item" data-value="advanced">Advanced</div>
-                                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="four fields">
+                            <div class="field">
+                                <label>Time signature</label>
+                                <input type="text" name="song[time-signature]" placeholder="Eg: 4/4">
+                            </div>
+                            <div class="field">
+                                <label>Key</label>
+                                <div class="ui search selection dropdown">
+                                    <input type="hidden" name="song[key]">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text">Eg: C, Am...</div>
+                                    <div class="menu">
+                                        <div class="item" data-value="(blank)">(blank)</div>
+                                        <div class="item" data-value="Сb">Сb</div>
+                                        <div class="item" data-value="Abm">Abm</div>
+                                        <div class="item" data-value="Gb">Gb</div>
+                                        <div class="item" data-value="Ebm">Ebm</div>
+                                        <div class="item" data-value="Db">Db</div>
+                                        <div class="item" data-value="Bbm">Bbm</div>
+                                        <div class="item" data-value="Ab">Ab</div>
+                                        <div class="item" data-value="Fm">Fm</div>
+                                        <div class="item" data-value="Eb">Eb</div>
+                                        <div class="item" data-value="Cm">Cm</div>
+                                        <div class="item" data-value="Bb">Bb</div>
+                                        <div class="item" data-value="Gm">Gm</div>
+                                        <div class="item" data-value="F">F</div>
+                                        <div class="item" data-value="Dm">Dm</div>
+                                        <div class="item" data-value="C">C</div>
+                                        <div class="item" data-value="Am">Am</div>
+                                        <div class="item" data-value="G">G</div>
+                                        <div class="item" data-value="Em">Em</div>
+                                        <div class="item" data-value="D">D</div>
+                                        <div class="item" data-value="Bm">Bm</div>
+                                        <div class="item" data-value="A">A</div>
+                                        <div class="item" data-value="F#m">F#m</div>
+                                        <div class="item" data-value="E">E</div>
+                                        <div class="item" data-value="C#m">C#m</div>
+                                        <div class="item" data-value="B">B</div>
+                                        <div class="item" data-value="G#m">G#m</div>
+                                        <div class="item" data-value="F#">F#</div>
+                                        <div class="item" data-value="D#m">D#m</div>
+                                        <div class="item" data-value="C#">C#</div>
+                                        <div class="item" data-value="A#m">A#m</div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="field">
+                                <label>Capo</label>
+                                <div class="ui search selection dropdown">
+                                    <input type="hidden" name="song[capo]">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text">Eg: 1st, 2nd...</div>
+                                    <div class="menu">
+                                        <div class="item" data-value="(no capo)">(no capo)</div>
+                                        <div class="item" data-value="1st">1st</div>
+                                        <div class="item" data-value="2nd">2nd</div>
+                                        <div class="item" data-value="3rd">3rd</div>
+                                        <div class="item" data-value="4th">4th</div>
+                                        <div class="item" data-value="5th">5th</div>
+                                        <div class="item" data-value="6th">6th</div>
+                                        <div class="item" data-value="7th">7th</div>
+                                        <div class="item" data-value="8th">8th</div>
+                                        <div class="item" data-value="9th">9th</div>
+                                        <div class="item" data-value="10th">10th</div>
+                                        <div class="item" data-value="11th">11th</div>
+                                        <div class="item" data-value="12th">12th</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Difficulty</label>
+                                <div class="ui selection dropdown">
+                                    <input type="hidden" name="song[difficulty]">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text">Set difficulty</div>
+                                    <div class="menu">
+                                        <div class="item" data-value="beginner">Beginner</div>
+                                        <div class="item" data-value="intermediate">Intermediate</div>
+                                        <div class="item" data-value="advanced">Advanced</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </form>
-                </div>
-                <h3 class="ui dividing header">Editor</h3>
-                <div class="textAreaWrapper">
-                    <textarea name="primaryTextArea" class="primaryTextArea"></textarea>
-                </div>
-                <div class="actionArea">
-                    <button class="ui basic button preview" type="button">
-                        <span class="text">Preview</span>
-                        <i class="right file text icon"></i>
-                    </button>
-                    <button class="ui right labeled icon button blue submit" type="button">
-                        <i class="right arrow icon"></i>
-                        <span class="text">Submit</span>
-                    </button>
-                </div>
+                    </div>
+                </form>
             </div>
-            <div class="row previewArea hidden">
-                <button class="ui basic labeled icon button goBack" type="button">
-                    <i class="arrow left icon"></i>
-                    <span class="text">Go back</span>
+            <h3 class="ui dividing header">Editor</h3>
+            <div class="textAreaWrapper">
+                <textarea name="primaryTextArea" class="primaryTextArea"></textarea>
+            </div>
+            <div class="actionArea">
+                <button class="ui basic button preview" type="button">
+                    <span class="text">Preview</span>
+                    <i class="right file text icon"></i>
                 </button>
-                <button class="ui right labeled icon button green confirmSubmit" type="button">
+                <button class="ui right labeled icon button green submit" type="button">
                     <i class="right arrow icon"></i>
                     <span class="text">Submit</span>
                 </button>
-                <h3 class="ui dividing header">Preview</h3>
-                <div class="one wide column">
-                    <div class="ui segment">
-                        <pre class="previewWrapper"></pre>
-                    </div>
+            </div>
+        </div>
+        <div class="row previewArea hidden">
+            <button class="ui basic labeled icon button goBack" type="button">
+                <i class="arrow left icon"></i>
+                <span class="text">Go back</span>
+            </button>
+            <button class="ui right labeled icon button green confirmSubmit" type="button">
+                <i class="right arrow icon"></i>
+                <span class="text">Submit</span>
+            </button>
+            <h3 class="ui dividing header songTitle"></h3>
+            <div class="one wide column songLabels"></div>
+            <div class="one wide column">
+                <div class="ui segment">
+                    <pre class="previewWrapper"></pre>
                 </div>
             </div>
         </div>
-    </body>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
-    <script src="js/vendor/linedtextarea.js"></script>
-    <script src="js/vendor/raphael.js"></script>
-    <script src="js/vendor/jTab.js"></script>
-    <script src="js/vendor/jschord.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
-    <script src="build.js"></script>
+    </div>
+    <script src="dist/js/scripts.min.js"></script>
     <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
     <script>
         window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
